@@ -1,8 +1,8 @@
 import { render } from "preact";
 import { App } from "./app.tsx";
 import "./index.css";
-import { add } from "nanopiniated";
+import { createStore } from "nanopiniated";
 
-console.log(add(1, 2) === 3);
+const store = createStore<{}, {}>({})((api) => ({}));
 
 render(<App />, document.getElementById("app")!);

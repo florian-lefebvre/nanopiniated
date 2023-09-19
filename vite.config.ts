@@ -5,14 +5,6 @@ import { typescriptPaths } from "rollup-plugin-typescript-paths";
 
 export default defineConfig({
   plugins: [],
-  resolve: {
-    alias: [
-      {
-        find: "~",
-        replacement: path.resolve(__dirname, "./src"),
-      },
-    ],
-  },
   server: {
     port: 3000,
   },
