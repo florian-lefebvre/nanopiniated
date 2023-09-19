@@ -38,10 +38,12 @@
   ],
   "scripts": {
     "build": "tsc && vite build",
-    "build:watch": "tsc && vite build --watch"
+    "build:watch": "tsc && vite build --watch",
+    "npm:publish": "pnpm build && np --no-cleanup"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.3",
+    "np": "^8.0.4",
     "rollup-plugin-typescript-paths": "^1.4.0",
     "tslib": "^2.6.2",
     "typescript": "^5.0.2",
