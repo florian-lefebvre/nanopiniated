@@ -1,3 +1,13 @@
+/**
+ * Creates a typed selector creator. Used by `configureHelpers` internally.
+ * 
+ * Example:
+ * ```ts
+ * type State = {};
+ * 
+ * const createSelector = createSelectorWithTypes<State>();
+ * ```
+ */
 export const createSelectorWithTypes = <
   TState extends Record<string, any>
 >() => {

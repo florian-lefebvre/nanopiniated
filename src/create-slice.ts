@@ -1,5 +1,16 @@
 import type { ApiFunction, ApiFunctionParam } from "./types";
 
+/**
+ * Creates a typed store slice creator. Used by `configureHelpers` internally.
+ * 
+ * Example:
+ * ```ts
+ * type State = {};
+ * type Extra = {};
+ * 
+ * const createSlice = createSliceWithTypes<State, Extra>();
+ * ```
+ */
 export const createSliceWithTypes = <
   TState extends Record<string, any>,
   TExtra

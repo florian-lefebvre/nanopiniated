@@ -1,0 +1,8 @@
+- [x] docs in comments
+- [ ] License
+- [ ] Publish to NPM
+- [ ] README
+  - [ ] What is it?
+  - [ ] Installation
+  - [ ] Example
+  - [ ] How to use it with several UI libraries

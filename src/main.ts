@@ -1,4 +1,3 @@
-// TODO: docs
 export * from "./configure-helpers";
 export * from "./create-action";
 export * from "./create-selector";

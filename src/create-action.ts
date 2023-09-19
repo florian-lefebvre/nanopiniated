@@ -54,6 +54,17 @@ export type Action<
   TBus extends _Bus<any, any> = _Bus<any, any>
 > = typeof _createAction<TState, TExtra, TApi, TArgs, TReturn, TBus>;
 
+/**
+ * Creates a typed action creator. Used by `configureHelpers` internally.
+ * 
+ * Example:
+ * ```ts
+ * type State = {};
+ * type Extra = {};
+ * 
+ * const createAction = createActionWithTypes<State, Extra>();
+ * ```
+ */
 export const createActionWithTypes =
   <TState extends Record<string, any>, TExtra>() =>
   <

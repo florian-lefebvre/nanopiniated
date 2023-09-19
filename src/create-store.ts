@@ -3,6 +3,35 @@ import { atom } from "nanostores";
 import { type Action } from "./create-action";
 import type { ApiFunction, ApiFunctionParam } from "./types";
 
+/**
+ * Creates a typed store that suppports dependencies injection
+ * and only contains state.
+ *
+ * Returns
+ * - `getState`
+ * - `useAction` that you can pass an action defined with `createAction`
+ * - `setInitialState` that you can use to hydrate for example
+ * - Raw `$store` nanostores' atom. Prefer other ways if possible
+ * 
+ * State can be broken in smaller pieces using `createSlice`.
+ *
+ * Example:
+ * ```ts
+ * type State = {
+ *    a: number
+ *    foo: FooSlice
+ * }
+ * type Extra = {
+ *    getNow(): Date
+ * }
+ * 
+ * const fooSlice = createSlice(...)
+ *
+ * const store = createStore({
+ *    getNow: () => new Date
+ * })((api) => ({ a: 0, foo: fooSlice(api) }))
+ * ```
+ */
 export const createStore = <TState extends Record<string, any>, TExtra>(
   extra: TExtra
 ) => {
