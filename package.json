@@ -39,7 +39,8 @@
   "scripts": {
     "build": "tsc && vite build",
     "build:watch": "tsc && vite build --watch",
-    "npm:publish": "pnpm build && np --no-cleanup"
+    "npm:publish": "pnpm build && np --no-cleanup",
+    "test": "echo 'No tests specified'"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.3",
