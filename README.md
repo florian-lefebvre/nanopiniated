@@ -22,7 +22,7 @@ From this observation, I thought it would be cool to write a wrapper around nano
 - Selectors
 - It's framework-agnostic!
 
-## Usage
+## Getting started
 
 Install package:
 
