@@ -24,15 +24,22 @@
   "private": false,
   "version": "0.1.3",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "main": "./dist/main.cjs",
-  "module": "./dist/main.js",
-  "typings": "./dist/main.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -44,18 +51,15 @@
     "node": ">=18.14.1"
   },
   "scripts": {
-    "build": "tsc && vite build",
-    "build:watch": "tsc && vite build --watch",
+    "build": "unbuild",
     "npm:publish": "pnpm build && np --no-cleanup",
     "test": "echo 'No tests specified'"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.1.3",
     "np": "^8.0.4",
-    "rollup-plugin-typescript-paths": "^1.4.0",
     "tslib": "^2.6.2",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "unbuild": "^2.0.0"
   },
   "dependencies": {
     "immer": "^10.0.2",

@@ -143,7 +143,7 @@ export const useMeal = (...args: Parameters<typeof mealSelector>) =>
 - Install latest LTS version of [Node.js](https://nodejs.org/en/)
 - Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`
 - Install dependencies using `pnpm install`
-- Run `pnpm build:watch`
+- Run `pnpm build`
 - Test changes in `./playground`
 
 ## License
