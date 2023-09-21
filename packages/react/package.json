@@ -1,6 +1,6 @@
 {
-  "name": "nanopiniated",
-  "description": "An opiniated wrapper for nanostores, clean architecure friendly",
+  "name": "@nanopiniated/react",
+  "description": "React integration for nanopiniated",
   "author": {
     "name": "Florian Lefebvre",
     "url": "https://github.com/florian-lefebvre"
@@ -19,10 +19,10 @@
     "state management",
     "clean architecture",
     "typescript",
-    "framework agnostic"
+    "react"
   ],
   "private": false,
-  "version": "0.1.4",
+  "version": "0.0.0",
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -51,20 +51,20 @@
     "node": ">=18.14.1"
   },
   "scripts": {
-    "prepare": "pnpm build:all",
     "build": "unbuild",
-    "build:all": "pnpm build && pnpm -r build",
     "npm:publish": "pnpm build && np --no-cleanup",
     "test": "echo 'No tests specified'"
   },
   "devDependencies": {
+    "@types/use-sync-external-store": "^0.0.4",
     "np": "^8.0.4",
     "tslib": "^2.6.2",
     "typescript": "^5.0.2",
-    "unbuild": "^2.0.0"
+    "unbuild": "^2.0.0",
+    "shared": "workspace:*"
   },
   "dependencies": {
-    "immer": "^10.0.2",
-    "nanostores": "^0.9.3"
+    "nanostores": "^0.9.3",
+    "use-sync-external-store": "^1.2.0"
   }
 }
