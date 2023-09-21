@@ -39,8 +39,8 @@ pnpm install nanopiniated
 
 You can use one or multiple integrations:
 
-- [@nanopiniated/react](./packages/react/README.md)
-- @nanopiniated/vue (Soon)
+- [@nanopiniated/react](https://github.com/florian-lefebvre/nanopiniated/tree/main/packages/react)
+- [@nanopiniated/vue](https://github.com/florian-lefebvre/nanopiniated/tree/main/packages/vue)
 - Need another one? Open an issue!
 
 Import:

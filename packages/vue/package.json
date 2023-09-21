@@ -1,0 +1,68 @@
+{
+  "name": "@nanopiniated/vue",
+  "description": "Vue 3 integration for nanopiniated",
+  "author": {
+    "name": "Florian Lefebvre",
+    "url": "https://github.com/florian-lefebvre"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/florian-lefebvre",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/florian-lefebvre/nanopiniated.git"
+  },
+  "bugs": {
+    "url": "https://github.com/florian-lefebvre/nanopiniated/issues"
+  },
+  "keywords": [
+    "nanostores",
+    "state management",
+    "clean architecture",
+    "typescript",
+    "vue"
+  ],
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@8.7.6",
+  "engines": {
+    "node": ">=18.14.1"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "npm:publish": "pnpm build && np --no-cleanup",
+    "test": "echo 'No tests specified'"
+  },
+  "devDependencies": {
+    "np": "^8.0.4",
+    "tslib": "^2.6.2",
+    "typescript": "^5.0.2",
+    "unbuild": "^2.0.0",
+    "shared": "workspace:*"
+  },
+  "dependencies": {
+    "nanostores": "^0.9.3"
+  }
+}
