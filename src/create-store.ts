@@ -9,8 +9,8 @@ import type { ApiFunction, ApiFunctionParam } from "./types";
  *
  * Returns
  * - `getState`
+ * - `setState` that you can use to hydrate for example
  * - `useAction` that you can pass an action defined with `createAction`
- * - `setInitialState` that you can use to hydrate for example
  * - Raw `$store` nanostores' atom. Prefer other ways if possible
  * 
  * State can be broken in smaller pieces using `createSlice`.
@@ -33,12 +33,14 @@ import type { ApiFunction, ApiFunctionParam } from "./types";
  * ```
  */
 export const createStore = <TState extends Record<string, any>, TExtra>(
-  extra: TExtra
+  extra: TExtra,
+  // TODO: find a better way. Maybe by changing what a slice returns?
+  initialState: TState
 ) => {
   type _ApiFunction = ApiFunction<TState, TExtra>;
   type _ApiFunctionParam = ApiFunctionParam<_ApiFunction>;
 
-  const $store = atom<TState>(undefined as any);
+  const $store = atom<TState>(initialState);
 
   const get = $store.get;
 
@@ -62,14 +64,14 @@ export const createStore = <TState extends Record<string, any>, TExtra>(
       >
     ) => action.handler(api);
 
-    const setInitialState = (newState: Partial<TState>) =>
+    const setState = (newState: Partial<TState>) =>
       $store.set({ ...$store.get(), ...newState });
 
     return {
       $store,
       getState: get,
+      setState,
       useAction,
-      setInitialState,
     };
   };
 };

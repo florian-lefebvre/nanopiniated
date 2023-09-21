@@ -1,12 +1,10 @@
 import { createActionWithTypes } from "./create-action";
 import { createSelectorWithTypes } from "./create-selector";
 import { createSliceWithTypes } from "./create-slice";
-import { createUseSelectorWithTypes } from "./create-use-selector";
-import type { UseStore } from "./types";
 
 /** 
  * Creates typed helpers. Uses `createSliceWithTypes`, `createSelectorWithTypes`,
- * `createUseSelectorWithTypes` and `createActionWithTypes` internally.
+ * and `createActionWithTypes` internally.
  * 
  * Requires a `useStore` function, provided by one of
  * [nanostores integrations](https://github.com/nanostores/nanostores#integration).
@@ -22,15 +20,10 @@ import type { UseStore } from "./types";
  *    createAction,
  *    createSelector,
  *    createSlice,
- *    createUseSelector,
- * } = configureHelpers<State, Extra>({ useStore });
+ * } = configureHelpers<State, Extra>();
  * ```
  */
-export const configureHelpers = <TState extends Record<string, any>, TExtra>({
-  useStore,
-}: {
-  useStore: UseStore<TState>;
-}) => {
+export const configureHelpers = <TState extends Record<string, any>, TExtra>() => {
   return {
     /**
      * Creates a store slice. Has access to the whole store api.
@@ -56,7 +49,6 @@ export const configureHelpers = <TState extends Record<string, any>, TExtra>({
     createSlice: createSliceWithTypes<TState, TExtra>(),
     /**
      * Allows creating selectors to hide querying logic.
-     * Works well with `useSelector`.
      *
      * Example:
      * ```ts
@@ -66,23 +58,6 @@ export const configureHelpers = <TState extends Record<string, any>, TExtra>({
      * ```
      */
     createSelector: createSelectorWithTypes<TState>(),
-    /**
-     * Allows reactive usage of selectors.
-     *
-     * Example:
-     * ```ts
-     * const meals = useSelector(mealsSelector());
-     * ```
-     *
-     * Wrap it in a hook to improve DX.
-     *
-     * Example:
-     * ```ts
-     * const useMeals = () => useSelector(mealsSelector());
-     * const useMeal = (...args: Parameters<typeof mealSelector>) => useSelector(mealSelector(...args));
-     * ```
-     */
-    createUseSelector: createUseSelectorWithTypes<TState>(useStore),
     /**
      * Allows encapsulating business logic while having access
      * to the store's API. Ideal for state mutations (using `set`,

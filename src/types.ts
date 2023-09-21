@@ -13,5 +13,3 @@ export type ApiFunction<
 
 export type ApiFunctionParam<TApiFunction extends ApiFunction<any, any>> =
   Parameters<TApiFunction>[0];
-
-export type UseStore<TState> = (store: WritableAtom<TState>) => TState;
