@@ -28,14 +28,20 @@ Install package:
 
 ```sh
 # npm
-npm install nanopiniated nanostores immer @nanostores/<framework>
+npm install nanopiniated
 
 # yarn
-yarn add nanopiniated nanostores immer @nanostores/<framework>
+yarn add nanopiniated
 
 # pnpm
-pnpm install nanopiniated nanostores immer @nanostores/<framework>
+pnpm install nanopiniated
 ```
+
+You can use one or multiple integrations:
+
+- [@nanopiniated/react](./packages/react/README.md)
+- @nanopiniated/vue (Soon)
+- Need another one? Open an issue!
 
 Import:
 
@@ -54,30 +60,31 @@ Create a store:
 ```ts
 // lib/store.ts
 
-import { mealsSlice, type MealsSlice } from "./meals";
-import { createUseSelector } from "./store-utils";
+import {
+  mealsSlice,
+  type MealsSlice,
+  DEFAULT_MEALS_SLICE_STATE,
+} from "./meals";
 import { createStore } from "nanopiniated";
 
 export type AppState = {
   meals: MealsSlice;
 };
 
-export type Extra = {
+export type AppExtra = {
   getNow(): string;
 };
 
-export const store = createStore<AppState, Extra>({
-  getNow: () => new Dat().toISOString(),
-})((api) => ({
+export const store = createStore<AppState, AppExtra>(
+  {
+    getNow: () => new Dat().toISOString(),
+  },
+  { meals: DEFAULT_MEALS_SLICE_STATE }
+)((api) => ({
   meals: mealsSlice(api),
-  analytics: analyticsSlice(api),
 }));
 
-export const useSelector = createUseSelector(store.$store);
-
 export const { useAction } = store;
-
-export const useAppStore = () => useSelector((state) => state);
 ```
 
 Create helpers:
@@ -85,12 +92,13 @@ Create helpers:
 ```ts
 // lib/store-utils.ts
 
-import { useStore } from "@nanostores/preact"; // Or switch with another nanostore integration
-import type { AppState, Extra } from "./store";
+import type { AppState, AppExtra } from "./store";
 import { configureHelpers } from "nanopiniated";
 
-export const { createAction, createSelector, createSlice, createUseSelector } =
-  configureHelpers<AppState, Extra>({ useStore });
+export const { createAction, createSelector, createSlice } = configureHelpers<
+  AppState,
+  AppExtra
+>();
 ```
 
 Create a slice:
@@ -109,14 +117,16 @@ export type MealsSlice = {
   meals: Meal[];
 };
 
+const DEFAULT_MEALS_SLICE_STATE: MealsSlice = {
+  meals: [],
+};
+
 export const mealsSlice = createSlice<MealsSlice>((api) => {
   addMealAction.onPending(({ args }) => {
     console.log(`Pending adding meal #${args[0].id}`);
   });
 
-  return {
-    meals: [],
-  };
+  return DEFAULT_MEALS_SLICE_STATE;
 });
 
 export const addMealAction = createAction(({ set }, meal: Meal) => {
@@ -124,17 +134,6 @@ export const addMealAction = createAction(({ set }, meal: Meal) => {
 
   return meal;
 });
-
-const mealsSelector = createSelector((state) => state.meals.meals);
-
-const mealSelector = createSelector((state, id: Meal["id"]) =>
-  state.meals.meals.find((m) => m.id === id)
-);
-
-export const useMeals = () => useSelector(mealsSelector());
-
-export const useMeal = (...args: Parameters<typeof mealSelector>) =>
-  useSelector(mealSelector(...args));
 ```
 
 ## Development
@@ -143,7 +142,7 @@ export const useMeal = (...args: Parameters<typeof mealSelector>) =>
 - Install latest LTS version of [Node.js](https://nodejs.org/en/)
 - Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`
 - Install dependencies using `pnpm install`
-- Run `pnpm build`
+- Run `pnpm build:all`
 - Test changes in `./playground`
 
 ## License

@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "echo 'No build specified'",
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.16.0",
-    "nanopiniated": "workspace:*"
+    "@nanopiniated/react": "workspace:*",
+    "nanopiniated": "workspace:*",
+    "preact": "^10.16.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
